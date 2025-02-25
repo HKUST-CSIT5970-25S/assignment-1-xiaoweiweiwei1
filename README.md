@@ -19,12 +19,13 @@
 
    **Configuration:**  
    Run the 7-Zip compression benchmark in Phoronix Test Suite, measuring the system's compression and decompression performance. 
-```
-phoronix-test-suite run pts/compress-7zip
-```  
+   ```
+   phoronix-test-suite run pts/compress-7zip
+   ```  
    Run a memory performance benchmark in the Phoronix Test Suite, specifically testing the speed of a system's RAM by measuring the read and write speeds.
-phoronix-test-suite run pts/ramspeed
-```
+   ```     
+   phoronix-test-suite run pts/ramspeed
+   ```
 
   **Measurement Values:**  
   For CPU measurement, I choose Decompression Rating MIPS, which assess CPU's instruction execution speed in millions of instructions per second.  
@@ -37,11 +38,20 @@ phoronix-test-suite run pts/ramspeed
 
     | Size        | CPU performance | Memory performance |
     | ----------- | --------------- | ------------------ |
-    | `t2.micro` | 3158 MIPS | 11310.45 MB/s |
-    | `t2.medium`  | 5902 MIPS | 19547.19 MB/s |
-    | `c5d.large` | 4861 MIPS | 13870.55 MB/s |
+    | `t2.micro`  | 3158 MIPS       | 11310.45 MB/s      |
+    | `t2.medium` | 5902 MIPS       | 19547.19 MB/s      |
+    | `c5d.large` | 4861 MIPS       | 13870.55 MB/s      |
 
     > Region: US East (N. Virginia). Use `Ubuntu Server 22.04 LTS (HVM)` as AMI.
+
+    According to the results, t2.medium's performance is the best, while t2.micro's is the worst with less vCPUs and memory resources. However, the performance of c5d.large is lower than t2.medium although they have the same number of VCPUs and memory. As the following table shows, t2.medium and c5d.large have different system architectures which may account for the performance difference. So the conclusion is the performance of EC2 instances generally increases with the increase of the number of vCPUs and memory resource with other factors fixed.
+   
+    | Size        |      vCPU	      |    Memory (GiB)    |    Architecture    |
+    | ----------- | --------------- | ------------------ | ------------------ |
+    | `t2.micro`  | 1               | 1                  | i386, x86_64       |
+    | `t2.medium` | 2               | 4                  | i386, x86_64       |
+    | `c5d.large` | 2               | 4                  | x86_64             |
+   
 
 ## Question 2: Measure the EC2 Network performance
 
@@ -49,21 +59,25 @@ phoronix-test-suite run pts/ramspeed
 
     | Type                      | TCP b/w (Mbps) | RTT (ms) |
     | ------------------------- | -------------- | -------- |
-    | `t3.medium` - `t3.medium` |                |          |
-    | `m5.large` - `m5.large`   |                |          |
-    | `c5n.large` - `c5n.large` |                |          |
-    | `t3.medium` - `c5n.large` |                |          |
-    | `m5.large` - `c5n.large`  |                |          |
-    | `m5.large` - `t3.medium`  |                |          |
+    | `t3.medium` - `t3.medium` | 3560           | 0.355    |
+    | `m5.large` - `m5.large`   | 4970           | 0.295    |
+    | `c5n.large` - `c5n.large` | 9410           | 0.124    |
+    | `t3.medium` - `c5n.large` | 2350           | 0.824    |
+    | `m5.large` - `c5n.large`  | 3810           | 0.444    |
+    | `m5.large` - `t3.medium`  | 1890           | 0.905    |
 
     > Region: US East (N. Virginia). Use `Ubuntu Server 22.04 LTS (HVM)` as AMI. Note: Use private IP address when using iPerf within the same region. You'll need iPerf for measuring TCP bandwidth and Ping for measuring Round-Trip time.
+
+    In the same region, the network performance between instances of the same type is better than that between instances of different types.
 
 2. (1 mark) What about the network performance for instances deployed in different regions? In order to answer this question, you need to complete the following table.
 
     | Connection                | TCP b/w (Mbps) | RTT (ms) |
     | ------------------------- | -------------- | -------- |
-    | N. Virginia - Oregon      |                |          |
-    | N. Virginia - N. Virginia |                |          |
-    | Oregon - Oregon           |                |          |
- 
+    | N. Virginia - Oregon      | 31.6           | 59.2     |
+    | N. Virginia - N. Virginia | 4890           | 0.268    |
+    | Oregon - Oregon           | 4960           | 0.178    |
+
     > Region: US East (N. Virginia), US West (Oregon). Use `Ubuntu Server 22.04 LTS (HVM)` as AMI. All instances are `c5.large`. Note: Use public IP address when using iPerf within the same region.
+
+    The connection speed between EC2 instances across different regions is significantly slower—by an order of magnitude—compared to instances within the same region.
