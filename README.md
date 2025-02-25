@@ -17,23 +17,29 @@
 
    **Measurement Tool: Phoronix Test Suite**  
 
-   **Configuration:**
-   d
-
-   
+   **Configuration:**  
+   Run the 7-Zip compression benchmark in Phoronix Test Suite, measuring the system's compression and decompression performance. 
 ```
 phoronix-test-suite run pts/compress-7zip
+```  
+   Run a memory performance benchmark in the Phoronix Test Suite, specifically testing the speed of a system's RAM by measuring the read and write speeds.
+phoronix-test-suite run pts/ramspeed
 ```
-   
-3. (1 mark) Run your measurement tool on general purpose `t2.micro`, `t2.medium`, and `c5d.large` Linux instances, respectively, and find the performance differences among these instances. Launch all the instances in the **US East (N. Virginia)** region. Does the performance of EC2 instances increase commensurate with the increase of the number of vCPUs and memory resource?
+
+  **Measurement Values:**  
+  For CPU measurement, I choose Decompression Rating MIPS, which assess CPU's instruction execution speed in millions of instructions per second.  
+  For memory performance measurement, I choose the Copy and Integer option to evaluate the performance by processing Interger operation. And the MB/s stands for Megabytes per second and is a unit of data transfer rate or data throughput.  
+  I use the default settings for both tests to ensure consistent and dependable benchmarking results for two cases.
+
+2. (1 mark) Run your measurement tool on general purpose `t2.micro`, `t2.medium`, and `c5d.large` Linux instances, respectively, and find the performance differences among these instances. Launch all the instances in the **US East (N. Virginia)** region. Does the performance of EC2 instances increase commensurate with the increase of the number of vCPUs and memory resource?
 
     In order to answer this question, you need to complete the following table by filling out blanks with the measurement results corresponding to each instance type.
 
     | Size        | CPU performance | Memory performance |
     | ----------- | --------------- | ------------------ |
-    | `t2.micro` |                 |                    |
-    | `t2.medium`  |                 |                    |
-    | `c5d.large` |                 |                    |
+    | `t2.micro` | 3158 MIPS | 11310.45 MB/s |
+    | `t2.medium`  | 5902 MIPS | 19547.19 MB/s |
+    | `c5d.large` | 4861 MIPS | 13870.55 MB/s |
 
     > Region: US East (N. Virginia). Use `Ubuntu Server 22.04 LTS (HVM)` as AMI.
 
