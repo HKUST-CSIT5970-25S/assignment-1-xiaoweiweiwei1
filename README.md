@@ -18,8 +18,7 @@
     **Measurement Tool: Phoronix Test Suite**  
 
     **Configuration:**  
-```phoronix-test-suite run pts/compress-7zip
-```
+```phoronix-test-suite run pts/compress-7zip```
    
 3. (1 mark) Run your measurement tool on general purpose `t2.micro`, `t2.medium`, and `c5d.large` Linux instances, respectively, and find the performance differences among these instances. Launch all the instances in the **US East (N. Virginia)** region. Does the performance of EC2 instances increase commensurate with the increase of the number of vCPUs and memory resource?
 
