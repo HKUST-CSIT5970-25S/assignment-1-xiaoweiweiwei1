@@ -26,8 +26,8 @@
    ```     
    phoronix-test-suite run pts/ramspeed
    ```
-
-  **Measurement Values:**  
+   
+   **Measurement Values:**  
   For CPU measurement, I choose Decompression Rating MIPS, which assess CPU's instruction execution speed in millions of instructions per second.  
   For memory performance measurement, I choose the Copy and Integer option to evaluate the performance by processing Interger operation. And the MB/s stands for Megabytes per second and is a unit of data transfer rate or data throughput.  
   I use the default settings for both tests to ensure consistent and dependable benchmarking results for two cases.
